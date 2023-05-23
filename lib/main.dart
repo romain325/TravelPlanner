@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
+import 'package:travelplanner/components/roadtripcard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
-        seconds: 3,
-        navigateAfterSeconds: const MyHomePage(title: "Travel planner"),
+        seconds: 1,
+        navigateAfterSeconds: const NavigationRouter(),
         title: const Text(
           "Travel Planner",
           style: TextStyle(
@@ -95,9 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const ImageCard(imageLink: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', label: "My label")
+            const ImageCard(imageLink: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', label: "My label"),
+            RoadTripCard(name: "voyage",
+                startDate: DateTime.utc(2001, 10, 16),
+                endDate: DateTime.now(),
+                departure: "Moulins",
+                arrival: "Lyon",
+                destCnt: 5)
           ],
         ),
       ),
