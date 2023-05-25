@@ -4,6 +4,7 @@ import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/homepage.dart';
+import 'package:travelplanner/newtravelpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: "/home",
+      routes: {
+        "/home": (context) => const HomePage(),
+        "/travel/create": (context) => const NewTravelPage(),
+      },
       title: 'Travel Planner',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
@@ -51,7 +57,7 @@ class NavigationRouter extends StatefulWidget {
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
+  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const MyHomePage(title: "title3")];
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +70,12 @@ class NavigationRouterState extends State<NavigationRouter> {
         },
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
+          NavigationDestination(icon: Icon(Icons.explore), label: "Explore", ),
           NavigationDestination(icon: Icon(Icons.add), label: "Plan travel"),
           NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
         ],
       ),
-      body: pages[currentPageIndex]
+      body: pages[currentPageIndex](context)
     );
   }
 

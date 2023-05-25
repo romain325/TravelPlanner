@@ -57,9 +57,9 @@ class HomePageState extends State<HomePage> {
               style: Theme.of(context).textTheme.displaySmall!.merge(const TextStyle(fontSize: 25)),
               child: const Text("My travels")),
         ),
-        Column(
+        Center(child: Column(
           children: roadTripCards,
-        )
+        ))
       ],
       )
     );
