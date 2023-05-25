@@ -6,6 +6,11 @@ import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/homepage.dart';
 import 'package:travelplanner/newtravelpage.dart';
 
+
+const d_purpose= const Color(0xff800080);
+const d_blue= const Color(0xFF0000FF);
+const d_black= const Color(0xFF000000);
+
 void main() {
   runApp(const MyApp());
 }
@@ -131,3 +136,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+//code de judicael
+
+/*import 'package:flutter/material.dart';
+//import 'delayed_animation.dart';
+import 'welcome_page.dart';
+
+
+
+const d_purpose= const Color(0xff800080);
+const d_blue= const Color(0xFF0000FF);
+const d_black= const Color(0xFF000000);
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Travel Planner',
+        home: WelcomePage()
+
+
+    );
+  }
+}*/
