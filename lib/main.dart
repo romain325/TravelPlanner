@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
+import 'package:travelplanner/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +51,7 @@ class NavigationRouter extends StatefulWidget {
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  List<Widget> pages = [const MyHomePage(title: "title"), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
+  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const ImageCard(imageLink: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', label: "My label"),
+            ImageCard.from("My label", 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', ),
             RoadTripCard(name: "voyage",
                 startDate: DateTime.utc(2001, 10, 16),
                 endDate: DateTime.now(),
