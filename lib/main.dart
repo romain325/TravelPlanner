@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'destination_page/destinationpage.dart';
+import 'firebase_options.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/homepage.dart';
 
-void main() {
+void main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -51,7 +59,8 @@ class NavigationRouter extends StatefulWidget {
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
+  //List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
+  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const DestinationPage()];
 
   @override
   Widget build(BuildContext context) {
