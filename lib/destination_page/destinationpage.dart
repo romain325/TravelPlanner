@@ -1,44 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 
-DatabaseReference database = FirebaseDatabase.instance.ref();
+import '../models/user.dart';
+import '../components/user_modal.dart';
 
-class DestinationPage extends StatefulWidget {
-  const DestinationPage({super.key});
-
+class UserListScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => DestinationPageState();
-
+  _UserListScreenState createState() => _UserListScreenState();
 }
 
-class DestinationPageState extends State<DestinationPage> {
+class _UserListScreenState extends State<UserListScreen> {
+  List<User> userList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserList();
+  }
+
+  Future<void> fetchUserList() async {
+    List<User> users = await User.getUsers();
+    setState(() {
+      userList = users;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title:
-        const Text("Talk to myself", style: TextStyle(color: Colors.black)),
+        title: Text('Liste des utilisateurs'),
       ),
-      body: Center(
-          child: IconButton(
-              onPressed: () {
-                addUser();
-              },
-              icon: const Icon(Icons.send))
+      body: userList.isEmpty
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : ListView.builder(
+        itemCount: userList.length,
+        itemBuilder: (BuildContext context, int index) {
+          User user = userList[index];
+          return GestureDetector(
+            onTap: () {
+              _showUserDetailsModal(user);
+            },
+            child: ListTile(
+              title: Text(user.firstname),
+              subtitle: Text(user.username),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  deleteUser(user);
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-}
+  Future<void> deleteUser(User user) async {
+    await user.deleteUser();
+    fetchUserList();
+  }
 
-void addUser() {
-  Map<String, dynamic> data = {
-    "firstname": "Romain",
-    "username": "r.olivier",
-    "password": "password"
-  };
+  Future<void> _showUserDetailsModal(User user) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return UserDetailModal(user: user);
+          },
+        );
+      },
+    );
+    fetchUserList();
+  }
 
-  database.child("Users").push().set(data);
 }

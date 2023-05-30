@@ -60,7 +60,7 @@ class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
   //List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
-  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const DestinationPage()];
+  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), UserListScreen()];
 
   @override
   Widget build(BuildContext context) {
