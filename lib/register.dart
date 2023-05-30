@@ -7,7 +7,7 @@ import 'login_page.dart';
 
 
 class RegisterPage extends StatelessWidget {
-
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class RegisterPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white.withOpacity(0),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.black,
             size: 30,
@@ -31,9 +31,9 @@ class RegisterPage extends StatelessWidget {
       ),
 
       Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+            image: AssetImage('./back.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -42,7 +42,7 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 40,
                 horizontal: 30,
               ),
@@ -60,7 +60,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 22),
+                  const SizedBox(height: 22),
                   DelayedAnimation(
                     delay: 0,
                     child: Text(
@@ -77,16 +77,16 @@ class RegisterPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 35),
-            LoginForm(),
-            SizedBox(height: 125),
+            const SizedBox(height: 35),
+            const LoginForm(),
+            const SizedBox(height: 125),
             DelayedAnimation(
               delay: 0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                  primary: d_purpose,
-                  padding: EdgeInsets.symmetric(
+                  shape: const StadiumBorder(),
+                  backgroundColor: d_purpose,
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 125,
                     vertical: 13,
                   ),
@@ -110,17 +110,17 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 90),
+            const SizedBox(height: 90),
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: EdgeInsets.only(right: 35),
+                padding: const EdgeInsets.only(right: 35),
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => const LoginPage(),
                       ),
                     );
                   },
@@ -147,8 +147,10 @@ class RegisterPage extends StatelessWidget {
   }
 }
 class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
   @override
-  _LoginFormState createState() => _LoginFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
@@ -156,12 +158,12 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 30,
       ),
       child: Column(
         children: [
-          SizedBox(height: 70),
+          const SizedBox(height: 70),
           DelayedAnimation(
             delay: 0,
             child: TextField(
@@ -174,7 +176,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(height: 35),
+          const SizedBox(height: 35),
           DelayedAnimation(
             delay: 0,
             child: TextField(
@@ -187,7 +189,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 0,
             child: TextField(
@@ -199,7 +201,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 labelText: 'Password',
                 suffixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.visibility,
                     color: Colors.black,
                   ),

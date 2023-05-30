@@ -6,19 +6,28 @@ import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/views/homepage.dart';
 import 'package:travelplanner/views/newtravelpage.dart';
 import 'package:travelplanner/views/roadmappage.dart';
+import 'package:travelplanner/welcome_page.dart';
 
 
-const d_purpose= const Color(0xff800080);
-const d_blue= const Color(0xFF0000FF);
-const d_black= const Color(0xFF000000);
+const d_purpose= Color(0xff800080);
+const d_blue= Color(0xFF0000FF);
+const d_black= Color(0xFF000000);
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
+  bool isAuth = true;
+
+
+  @override
+  State<StatefulWidget> createState() => AppState();
+}
+
+class AppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,14 +44,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
         seconds: 1,
-        navigateAfterSeconds: const NavigationRouter(),
+        navigateAfterSeconds: widget.isAuth ? const NavigationRouter() : const WelcomePage(),
         title: const Text(
           "Travel Planner",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-            fontFamily: 'Futura',
-            color: Colors.white
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              fontFamily: 'Futura',
+              color: Colors.white
           ),
         ),
         backgroundColor: Colors.deepPurple,
@@ -50,6 +59,7 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class NavigationRouter extends StatefulWidget {
@@ -137,31 +147,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-//code de judicael
-
-/*import 'package:flutter/material.dart';
-//import 'delayed_animation.dart';
-import 'welcome_page.dart';
-
-
-
-const d_purpose= const Color(0xff800080);
-const d_blue= const Color(0xFF0000FF);
-const d_black= const Color(0xFF000000);
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Travel Planner',
-        home: WelcomePage()
-
-
-    );
-  }
-}*/
