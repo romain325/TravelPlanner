@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:splashscreen/splashscreen.dart';
+//import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/homepage.dart';
 import 'package:travelplanner/newtravelpage.dart';
+//import 'welcome_page.dart';
 
 
 const d_purpose= const Color(0xff800080);
