@@ -14,8 +14,7 @@ class WelcomePage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                // PAS DE LIEN
-                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+                image: AssetImage('./back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -32,9 +31,7 @@ class WelcomePage extends StatelessWidget {
                     delay: 0,
                     child: SizedBox(
                       height: 150,
-                      // LA MEME
-                      child: Image.asset('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/'
-                          'Travel_Planner/images/travelo.png'),
+                      child: Image.asset('./travelo.png'),
                     ),
                   ),
                   /*DelayedAnimation(
@@ -65,7 +62,7 @@ class WelcomePage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: d_purpose,
+                          backgroundColor: d_purpose,
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.all(13),
                         ),

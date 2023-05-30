@@ -33,8 +33,7 @@ class RegisterPage extends StatelessWidget {
       Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            // NON TOUJOURS PAS, on est pas tous sur ton pc
-            image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+            image: AssetImage('./back.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -79,14 +78,14 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 35),
-            LoginForm(),
+            const LoginForm(),
             const SizedBox(height: 125),
             DelayedAnimation(
               delay: 0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
-                  primary: d_purpose,
+                  backgroundColor: d_purpose,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 125,
                     vertical: 13,
@@ -104,7 +103,7 @@ class RegisterPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MyApp(),
+                      builder: (context) => MyApp(),
                     ),
                   );
                 },

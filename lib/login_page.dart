@@ -32,8 +32,7 @@ class LoginPage extends StatelessWidget {
       Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            // NON
-            image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+            image: AssetImage('./back.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -89,7 +88,7 @@ class LoginPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
-                  primary: d_purpose,
+                  backgroundColor: d_purpose,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 125,
                     vertical: 13,
@@ -107,7 +106,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MyApp(),
+                      builder: (context) => MyApp(),
                     ),
                   );
                 },
@@ -119,7 +118,7 @@ class LoginPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
-                  primary: d_purpose,
+                  backgroundColor: d_purpose,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 125,
                     vertical: 15,
