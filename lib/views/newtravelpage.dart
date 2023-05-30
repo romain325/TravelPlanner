@@ -21,9 +21,8 @@ class NewTravelPageState extends State<NewTravelPage> {
       children: <Widget>[
         BackBanner(
           message: "New travel",
-          onTap: (context) {
-            Navigator.pop(context);
-            log("message");
+          onTap: () {
+            log("GET BACK");
           },
         ),
         const StylizedCard(

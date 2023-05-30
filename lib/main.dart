@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
-import 'package:travelplanner/homepage.dart';
-import 'package:travelplanner/newtravelpage.dart';
+import 'package:travelplanner/views/homepage.dart';
+import 'package:travelplanner/views/newtravelpage.dart';
+import 'package:travelplanner/views/roadmappage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,7 +58,7 @@ class NavigationRouter extends StatefulWidget {
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const MyHomePage(title: "title3")];
+  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const RoadMapPage()];
 
   @override
   Widget build(BuildContext context) {
