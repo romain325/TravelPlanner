@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'destination_page/destinationpage.dart';
 import 'firebase_options.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
@@ -60,7 +59,7 @@ class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
   //List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
-  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const DestinationPage()];
+  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2")];
 
   @override
   Widget build(BuildContext context) {
