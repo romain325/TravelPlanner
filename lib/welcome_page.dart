@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'delayed_animation.dart';
-import 'main.dart';
 import 'login_page.dart';
+import 'main.dart';
 import 'register.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -72,7 +72,7 @@ class WelcomePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => LoginInformation(),
                             ),
                           );
                         },
