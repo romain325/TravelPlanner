@@ -3,27 +3,11 @@ import 'delayed_animation.dart';
 import 'dart:async';
 
 
-
-class LoginForm extends StatefulWidget {
-
-   LoginForm({Key? key, required this.usernameController, required this.passwordController}) : super(key: key);
-  @override
-  _LoginFormState createState() => _LoginFormState();
-
-
-
+class LoginForm extends StatelessWidget {
+  var _obscureText = true;
+  LoginForm({Key? key, required this.usernameController, required this.passwordController});
   TextEditingController usernameController ;
   TextEditingController passwordController ;
-}
-
-
-
-class _LoginFormState extends State<LoginForm> {
-  var _obscureText = true;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +20,7 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 500,
             child: TextField(
-              controller: _usernameController,
+              controller: usernameController,
               decoration: InputDecoration(
                 labelText: 'Username',
                 labelStyle: TextStyle(
@@ -50,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 500,
             child: TextField(
-              controller: _passwordController,
+              controller: passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 labelStyle: TextStyle(
