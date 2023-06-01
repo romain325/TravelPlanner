@@ -4,7 +4,7 @@ class BackBanner extends StatelessWidget {
   const BackBanner({super.key, required this.message, required this.onTap });
 
   final String message;
-  final Function(BuildContext context) onTap;
+  final Function() onTap;
   TextStyle? fontStyle(BuildContext context) =>
       Theme.of(context).textTheme.displaySmall;
 
@@ -12,7 +12,7 @@ class BackBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     return GestureDetector(
-        onTap: () => {},
+        onTap: onTap,
         child: Container(
             margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
             color: Color.fromRGBO(
