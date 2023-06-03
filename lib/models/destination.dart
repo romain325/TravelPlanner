@@ -51,9 +51,9 @@ class Destination {
   }
 
   // Méthode pour récupérer un utilisateur spécifique à partir de la base de données
-  static Future<Destination?> getJourney(String destinationId) async {
+  static Future<Destination?> getDestination(String destinationId) async {
     DatabaseReference reference =
-    FirebaseDatabase.instance.ref().child('Journeys').child(destinationId);
+    FirebaseDatabase.instance.ref().child('Destinations').child(destinationId);
 
     DataSnapshot snapshot = (await reference.once()) as DataSnapshot;
     if (snapshot.value != null) {
@@ -72,12 +72,13 @@ class Destination {
   }
 
   // Méthode pour récupérer la liste des travels d'un utilisateur
-  static Future<List<Destination>> getDestinations(String destinationId) async {
+  static Future<List<Destination>> getDestinations(String travelId) async {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Destinations');
 
-    Query query = reference.orderByChild('travel_id').equalTo(destinationId);
+    Query query = reference.orderByChild('travel_id').equalTo("0");
     DatabaseEvent event = await query.once();
+    print(event.snapshot.value);
     DataSnapshot snapshot = event.snapshot;
     List<Destination> destinationList = [];
 
@@ -86,26 +87,25 @@ class Destination {
 
       for (DataSnapshot ds in snapshot.children){
         String? key = ds.key;
-        print(jsonEncode(ds.value));
 
         String city = ds.child('city').value.toString();
         String comment = ds.child('comment').value.toString();
-        String date = ds.child('end_date').value.toString();
-        String hour = ds.child('start_date').value.toString();
+        String end_date = ds.child('end_date').value.toString();
+        String start_date = ds.child('start_date').value.toString();
         String travel_id = ds.child('travel_id').value.toString();
 
         destinationList.add(Destination(
           key!,
           city,
           comment,
-          date,
-          hour,
+          end_date,
+          start_date,
           travel_id,
         ));
       }
 
     }
-
+    print(destinationList);
     return destinationList;
   }
 

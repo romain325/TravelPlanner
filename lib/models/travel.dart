@@ -82,7 +82,6 @@ class Travel {
 
     Query query = reference.orderByChild('user_id').equalTo(userId);
     DatabaseEvent event = await query.once();
-    print(event.snapshot.value);
     DataSnapshot snapshot = event.snapshot;
     List<Travel> travelList = [];
 
