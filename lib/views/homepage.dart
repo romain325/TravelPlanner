@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
 
-import 'components/imagecard.dart';
+import '../components/imagecard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -57,9 +57,9 @@ class HomePageState extends State<HomePage> {
               style: Theme.of(context).textTheme.displaySmall!.merge(const TextStyle(fontSize: 25)),
               child: const Text("My travels")),
         ),
-        Column(
+        Center(child: Column(
           children: roadTripCards,
-        )
+        ))
       ],
       )
     );

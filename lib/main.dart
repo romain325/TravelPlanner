@@ -5,7 +5,16 @@ import 'firebase_options.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
-import 'package:travelplanner/homepage.dart';
+import 'package:travelplanner/views/homepage.dart';
+import 'package:travelplanner/views/newtravelpage.dart';
+import 'package:travelplanner/views/roadmappage.dart';
+import 'package:travelplanner/welcome_page.dart';
+
+
+const d_purpose= Color(0xff800080);
+const d_blue= Color(0xFF0000FF);
+const d_black= Color(0xFF000000);
+
 
 void main() async {
 
@@ -14,14 +23,28 @@ void main() async {
   );
 
   runApp(const MyApp());
+
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
+  bool isAuth = true;
+
+
+  @override
+  State<StatefulWidget> createState() => AppState();
+}
+
+class AppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: "/home",
+      routes: {
+        "/home": (context) => const HomePage(),
+        "/travel/create": (context) => const NewTravelPage(),
+      },
       title: 'Travel Planner',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
@@ -30,14 +53,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
         seconds: 1,
-        navigateAfterSeconds: const NavigationRouter(),
+        navigateAfterSeconds: widget.isAuth ? const NavigationRouter() : const WelcomePage(),
         title: const Text(
           "Travel Planner",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-            fontFamily: 'Futura',
-            color: Colors.white
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              fontFamily: 'Futura',
+              color: Colors.white
           ),
         ),
         backgroundColor: Colors.deepPurple,
@@ -45,6 +68,7 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class NavigationRouter extends StatefulWidget {
@@ -58,8 +82,8 @@ class NavigationRouter extends StatefulWidget {
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  //List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2"), const MyHomePage(title: "title3")];
-  List<Widget> pages = [const HomePage(), const MyHomePage(title: "title2")];
+
+  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const RoadMapPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -72,12 +96,12 @@ class NavigationRouterState extends State<NavigationRouter> {
         },
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.explore), label: "Explore"),
+          NavigationDestination(icon: Icon(Icons.explore), label: "Explore", ),
           NavigationDestination(icon: Icon(Icons.add), label: "Plan travel"),
           NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
         ],
       ),
-      body: pages[currentPageIndex]
+      body: pages[currentPageIndex](context)
     );
   }
 
