@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
@@ -13,8 +15,15 @@ const d_purpose= Color(0xff800080);
 const d_blue= Color(0xFF0000FF);
 const d_black= Color(0xFF000000);
 
-void main() {
-  runApp(MyApp());
+
+void main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+
 }
 
 class MyApp extends StatefulWidget {
@@ -72,6 +81,7 @@ class NavigationRouter extends StatefulWidget {
 
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
+
 
   List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const RoadMapPage()];
 
