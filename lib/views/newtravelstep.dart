@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:travelplanner/components/backbanner.dart';
+import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/components/stylizedcard.dart';
 import 'package:travelplanner/view_components/newstepcomp/newstepform.dart';
 

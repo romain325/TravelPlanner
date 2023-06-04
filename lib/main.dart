@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/views/newtravelstep.dart';
 import 'firebase_options.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -45,6 +46,7 @@ class AppState extends State<MyApp> {
       initialRoute: "/home",
       routes: {
         "/home": (context) => const HomePage(),
+        "/roadmap": (context) => const RoadMapPage(),
         "/travel/create": (context) => const NewTravelPage(),
         "/step/create": (context) => const NewTravelStep(),
       },
@@ -56,7 +58,7 @@ class AppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
         seconds: 1,
-        navigateAfterSeconds: widget.isAuth ? const NavigationRouter() : WelcomePage(),
+        navigateAfterSeconds: widget.isAuth ? const HomePage() : WelcomePage(),
         title: const Text(
           "Travel Planner",
           style: TextStyle(
@@ -69,43 +71,6 @@ class AppState extends State<MyApp> {
         backgroundColor: Colors.deepPurple,
         loaderColor: Colors.white,
       ),
-    );
-  }
-
-}
-
-class NavigationRouter extends StatefulWidget {
-  const NavigationRouter({Key? key}) : super(key: key);
-
-
-  @override
-  State<StatefulWidget> createState() => NavigationRouterState();
-
-}
-
-class NavigationRouterState extends State<NavigationRouter> {
-  int currentPageIndex = 0;
-
-
-  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(),(context) => const RoadMapPage()];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.explore), label: "Explore", ),
-          NavigationDestination(icon: Icon(Icons.add), label: "Plan travel"),
-          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
-        ],
-      ),
-      body: pages[currentPageIndex](context)
     );
   }
 
