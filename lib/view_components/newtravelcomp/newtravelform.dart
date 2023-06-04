@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NewTravelForm extends StatefulWidget {
-  const NewTravelForm({super.key});
+  const NewTravelForm({Key? key}) : super(key: key);
+
 
   @override
   State<StatefulWidget> createState() => NewTravelFormState();

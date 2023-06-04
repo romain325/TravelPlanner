@@ -5,7 +5,8 @@ import 'package:travelplanner/components/roadtripcard.dart';
 import '../components/imagecard.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
+
 
   @override
   State<StatefulWidget> createState() => HomePageState();
