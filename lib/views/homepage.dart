@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/components/roadtripcard.dart';
 
 import '../components/imagecard.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
+
 
   @override
   State<StatefulWidget> createState() => HomePageState();
@@ -28,7 +30,9 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scaffold(
+        bottomNavigationBar: const NavBar(),
+        body:SingleChildScrollView(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -62,7 +66,7 @@ class HomePageState extends State<HomePage> {
         ))
       ],
       )
-    );
+    ));
   }
 
 }

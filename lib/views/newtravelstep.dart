@@ -4,31 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:travelplanner/components/backbanner.dart';
 import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/components/stylizedcard.dart';
-import 'package:travelplanner/view_components/newtravelcomp/newtravelform.dart';
+import 'package:travelplanner/view_components/newstepcomp/newstepform.dart';
 
-class NewTravelPage extends StatefulWidget {
-  const NewTravelPage({Key? key}) : super(key: key);
+class NewTravelStep extends StatefulWidget {
+  const NewTravelStep({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => NewTravelPageState();
+  State<StatefulWidget> createState() => NewTravelStepState();
+
 }
 
-class NewTravelPageState extends State<NewTravelPage> {
+class NewTravelStepState extends State<NewTravelStep> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavBar(),
-        body: Column(
+      body: Column(
       children: <Widget>[
         BackBanner(
           message: "New travel",
           onTap: () {
             log("GET BACK");
-            Navigator.pushNamed(context, "/home");
+            Navigator.pop(context);
           },
         ),
         const StylizedCard(
-          child: NewTravelForm(),
+          child: NewStepForm(),
         )
       ],
     ));
