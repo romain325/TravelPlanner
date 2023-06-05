@@ -90,7 +90,6 @@ class Travel {
 
       for (DataSnapshot ds in snapshot.children){
         String? key = ds.key;
-        print(jsonEncode(ds.value));
 
         String arrival = ds.child('arrival').value.toString();
         String departure = ds.child('departure').value.toString();

@@ -1,12 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelplanner/components/commonbutton.dart';
+import 'package:travelplanner/destination_page/widgets/daycard.dart';
 
+import '../components/backbanner.dart';
 import '../models/day.dart';
+import '../models/destination.dart';
 
 class DestinationDetails extends StatefulWidget {
-  final String destinationId;
+  final Destination destination;
 
-  DestinationDetails({required this.destinationId});
+  const DestinationDetails({super.key, required this.destination});
 
   @override
   _DestinationDetailsScreenState createState() =>
@@ -14,7 +20,7 @@ class DestinationDetails extends StatefulWidget {
 }
 
 class _DestinationDetailsScreenState extends State<DestinationDetails> {
-  List<Day> dayList = [];
+  List<DayCard> dayWidgets = [];
 
   @override
   void initState() {
@@ -23,45 +29,36 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
   }
 
   Future<void> fetchDayList() async {
-    List<Day> days = await Day.getDays(widget.destinationId);
+    List<DayCard> dayList = [];
+
+    for (Day day in await Day.getDays(widget.destination.id)) {
+      dayList.add(DayCard(day));
+    }
+
     setState(() {
-      dayList = days;
+      dayWidgets = dayList;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Liste des jours'),
+    return Column(children: [
+      BackBanner(
+          title: widget.destination.city,
+          subtitle: widget.destination.start_date +
+              " - " +
+              widget.destination.end_date,
+          onTap: () {}),
+      Expanded(
+        flex: 8,
+        child: dayWidgets.isEmpty
+            ? const Center(
+                child: Text("Aucune journée planifiée"),
+              )
+            : Column(children: dayWidgets),
       ),
-      body: dayList.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: dayList.length,
-              itemBuilder: (BuildContext context, int index) {
-                Day day = dayList[index];
-                return Card(
-                  // ... autres propriétés de la Card
-                  child: ListTile(
-                    leading: Icon(Icons.calendar_today),
-                    title: Text(day.date),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //Text('${day.comment} (${day.activityCount} activités)'),
-                        //Text('Réveil : ${day.wakeUpTime}'),
-                      ],
-                    ),
-                    onTap: () {
-                      //navigateToActivityList(day);
-                    },
-                  ),
-                );
-              },
-            ),
-    );
+
+      CommonButton("Add day", () => log("Add day"))
+    ]);
   }
 }

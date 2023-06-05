@@ -78,7 +78,6 @@ class Destination {
 
     Query query = reference.orderByChild('travel_id').equalTo("0");
     DatabaseEvent event = await query.once();
-    print(event.snapshot.value);
     DataSnapshot snapshot = event.snapshot;
     List<Destination> destinationList = [];
 
@@ -105,7 +104,6 @@ class Destination {
       }
 
     }
-    print(destinationList);
     return destinationList;
   }
 

@@ -13,8 +13,9 @@ class Day {
   final String date;
   final String destination_id;
   final String wake_up;
+  int? activity_count = 0;
 
-  Day(this.id, this.comment, this.date, this.destination_id, this.wake_up);
+  Day(this.id, this.comment, this.date, this.destination_id, this.wake_up, [this.activity_count]);
 
   // Méthode pour insérer un utilisateur dans la base de données
   Future<void> insertDay() async {
@@ -71,19 +72,17 @@ class Day {
   static Future<List<Day>> getDays(String destinationId) async {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Days');
-    print(destinationId);
     Query query = reference.orderByChild('destination_id').equalTo(destinationId);
     DatabaseEvent event = await query.once();
-    print(event.snapshot.value);
     DataSnapshot snapshot = event.snapshot;
     List<Day> dayList = [];
-
 
     if (snapshot.value != null) {
 
       for (DataSnapshot ds in snapshot.children){
         String? key = ds.key;
 
+        int activityCount = await getActivityCount(key!);
         String comment = ds.child('comment').value.toString();
         String date = ds.child('date').value.toString();
         String destination_id = ds.child('destination_id').value.toString();
@@ -95,6 +94,7 @@ class Day {
           date,
           destination_id,
           wake_up,
+          activityCount
         ));
       }
 
@@ -103,7 +103,7 @@ class Day {
     return dayList;
   }
 
-  /*static Future<int> getActivityCount(String dayId) async {
+  static Future<int> getActivityCount(String dayId) async {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Activities');
 
@@ -111,7 +111,13 @@ class Day {
     DatabaseEvent event = await query.once();
     DataSnapshot snapshot = event.snapshot;
 
-    return snapshot.value != null ? snapshot.value : 0;
-  }*/
+    int i = 0;
+    for(DataSnapshot ds in snapshot.children){
+      i++;
+    }
+
+    return i;
+
+  }
 
 }
