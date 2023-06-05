@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BackBanner extends StatelessWidget {
+
   const BackBanner(
       {required this.title,
       required this.onTap,
@@ -70,4 +71,5 @@ class BackBanner extends StatelessWidget {
     }
 
   }
+
 }

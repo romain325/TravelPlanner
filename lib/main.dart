@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:travelplanner/destination_page/destination_details.dart';
-import 'package:travelplanner/temp_page.dart';
+
+import 'package:travelplanner/components/navbar.dart';
+import 'package:travelplanner/views/newtravelstep.dart';
+
 import 'firebase_options.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
@@ -29,10 +31,10 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
 
   bool isAuth = true;
 
+  MyApp({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => AppState();
@@ -45,7 +47,9 @@ class AppState extends State<MyApp> {
       initialRoute: "/home",
       routes: {
         "/home": (context) => const HomePage(),
+        "/roadmap": (context) => const RoadMapPage(),
         "/travel/create": (context) => const NewTravelPage(),
+        "/step/create": (context) => const NewTravelStep(),
       },
       title: 'Travel Planner',
       theme: ThemeData(
@@ -55,7 +59,7 @@ class AppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(
         seconds: 1,
-        navigateAfterSeconds: widget.isAuth ? const NavigationRouter() : WelcomePage(),
+        navigateAfterSeconds: widget.isAuth ? const HomePage() : WelcomePage(),
         title: const Text(
           "Travel Planner",
           style: TextStyle(
@@ -109,7 +113,8 @@ class NavigationRouterState extends State<NavigationRouter> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 

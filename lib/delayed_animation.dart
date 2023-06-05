@@ -4,7 +4,8 @@ import 'dart:async';
 class DelayedAnimation extends StatefulWidget {
   final Widget child;
   final int delay;
-  const DelayedAnimation ({key, required this.delay, required this.child}) ;
+
+  const DelayedAnimation ({super.key, required this.delay, required this.child}) ;
 
   @override
   State<DelayedAnimation>  createState() => _DelayedAnimationState();
