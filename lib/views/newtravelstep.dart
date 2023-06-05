@@ -21,7 +21,7 @@ class NewTravelStepState extends State<NewTravelStep> {
       body: Column(
       children: <Widget>[
         BackBanner(
-          message: "New travel",
+          title: "New travel",
           onTap: () {
             log("GET BACK");
             Navigator.pop(context);

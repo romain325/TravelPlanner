@@ -5,6 +5,7 @@ import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/views/newtravelstep.dart';
 
 import 'firebase_options.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 import 'package:travelplanner/components/imagecard.dart';
@@ -14,24 +15,19 @@ import 'package:travelplanner/views/newtravelpage.dart';
 import 'package:travelplanner/views/roadmappage.dart';
 import 'package:travelplanner/welcome_page.dart';
 
-
-const d_purpose= Color(0xff800080);
-const d_blue= Color(0xFF0000FF);
-const d_black= Color(0xFF000000);
-
+const d_purpose = Color(0xff800080);
+const d_blue = Color(0xFF0000FF);
+const d_black = Color(0xFF000000);
 
 void main() async {
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(MyApp());
-
 }
 
 class MyApp extends StatefulWidget {
-
   bool isAuth = true;
 
   MyApp({Key? key}) : super(key: key);
@@ -66,15 +62,13 @@ class AppState extends State<MyApp> {
               fontWeight: FontWeight.bold,
               fontSize: 20.0,
               fontFamily: 'Futura',
-              color: Colors.white
-          ),
+              color: Colors.white),
         ),
         backgroundColor: Colors.deepPurple,
         loaderColor: Colors.white,
       ),
     );
   }
-
 }
 
 class NavigationRouter extends StatefulWidget {
@@ -82,38 +76,42 @@ class NavigationRouter extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => NavigationRouterState();
-
 }
 
 class NavigationRouterState extends State<NavigationRouter> {
   int currentPageIndex = 0;
 
-  List<Widget Function(BuildContext)> pages = [(context) => const HomePage(),(context) => const NewTravelPage(), (context) => TravelListScreen()];
+  List<Widget Function(BuildContext)> pages = [
+    (context) => const HomePage(),
+    (context) => const NewTravelPage(),
+    (context) => const HomePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.explore), label: "Explore", ),
-          NavigationDestination(icon: Icon(Icons.add), label: "Plan travel"),
-          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
-        ],
-      ),
-      body: pages[currentPageIndex](context)
-    );
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          selectedIndex: currentPageIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.explore),
+              label: "Explore",
+            ),
+            NavigationDestination(icon: Icon(Icons.add), label: "Plan travel"),
+            NavigationDestination(
+                icon: Icon(Icons.settings), label: "Settings"),
+          ],
+        ),
+        body: pages[currentPageIndex](context));
   }
-
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
@@ -145,8 +143,12 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            ImageCard.from("My label", 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', ),
-            RoadTripCard(name: "voyage",
+            ImageCard.from(
+              "My label",
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+            ),
+            RoadTripCard(
+                name: "voyage",
                 startDate: DateTime.utc(2001, 10, 16),
                 endDate: DateTime.now(),
                 departure: "Moulins",
