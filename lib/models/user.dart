@@ -15,15 +15,6 @@ class User {
 
   User(this.id, this.firstname, this.password, this.username);
 
-  factory User.fromJson(json){
-    return User(
-      json['id'],
-      json['firstname'],
-      json['password'],
-      json['username'],
-    );
-  }
-
   // Méthode pour insérer un utilisateur dans la base de données
   Future<void> insertUser() async {
     DatabaseReference reference =

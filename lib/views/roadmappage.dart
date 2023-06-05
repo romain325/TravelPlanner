@@ -21,7 +21,7 @@ class RoadMapPageState extends State<RoadMapPage> {
         body: Column(
           children: <Widget>[
             BackBanner(
-                message: "Roadtrip",
+                title: "Roadtrip",
                 onTap: () {
                   log("hiiiii");
                 }),

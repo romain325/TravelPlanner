@@ -14,6 +14,7 @@ class NewTravelPage extends StatefulWidget {
 }
 
 class NewTravelPageState extends State<NewTravelPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +22,7 @@ class NewTravelPageState extends State<NewTravelPage> {
         body: Column(
       children: <Widget>[
         BackBanner(
-          message: "New travel",
+          title: "New travel",
           onTap: () {
             log("GET BACK");
             Navigator.pushNamed(context, "/home");

@@ -82,7 +82,6 @@ class Travel {
 
     Query query = reference.orderByChild('user_id').equalTo(userId);
     DatabaseEvent event = await query.once();
-    print(event.snapshot.value);
     DataSnapshot snapshot = event.snapshot;
     List<Travel> travelList = [];
 
@@ -91,7 +90,6 @@ class Travel {
 
       for (DataSnapshot ds in snapshot.children){
         String? key = ds.key;
-        print(jsonEncode(ds.value));
 
         String arrival = ds.child('arrival').value.toString();
         String departure = ds.child('departure').value.toString();
