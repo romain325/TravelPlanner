@@ -12,6 +12,7 @@ dependencies:
   carousel_slider: any
   firebase_core:
   firebase_database: ^10.2.1
+  firebase_auth:
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.1.0
 

@@ -7,7 +7,11 @@ import 'main.dart';
 import 'register.dart';
 import 'loginform_login.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LoginInformation extends StatefulWidget {
   const LoginInformation({Key? key}) : super(key: key);
@@ -19,8 +23,9 @@ class LoginInformation extends StatefulWidget {
 
 
 class _LoginInformationState extends State<LoginInformation> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   /*final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();*/
@@ -46,7 +51,7 @@ class _LoginInformationState extends State<LoginInformation> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+                image: AssetImage('../assets/back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -95,7 +100,7 @@ class _LoginInformationState extends State<LoginInformation> {
                   ),
                 ),
                 SizedBox(height: 95),
-                LoginForm(usernameController: _usernameController, passwordController: _passwordController,),
+                LoginForm(emailController: _emailController, passwordController: _passwordController,),
                 SizedBox(height: 125),
                 DelayedAnimation(
                   delay: 0,
@@ -117,8 +122,10 @@ class _LoginInformationState extends State<LoginInformation> {
                       ),
                     ),
                     onPressed: () {
-                      String username = _usernameController.value.text;
+                      String email = _emailController.value.text;
                       String password = _passwordController.value.text;
+                      debugPrint("$email $password");
+                      signInWithEmailAndPassword(email, password);
 
                       Navigator.push(
                         context,
@@ -199,4 +206,21 @@ class _LoginInformationState extends State<LoginInformation> {
   }
 }
 
+Future<void> signInWithEmailAndPassword(String email, String password) async {
+
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    );
+    print('user connected');
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+    }
+  }
+
+}
 
