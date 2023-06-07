@@ -5,8 +5,8 @@ import 'dart:async';
 
 class LoginForm extends StatelessWidget {
   var _obscureText = true;
-  LoginForm({Key? key, required this.usernameController, required this.passwordController});
-  TextEditingController usernameController ;
+  LoginForm({Key? key, required this.emailController, required this.passwordController});
+  TextEditingController emailController ;
   TextEditingController passwordController ;
 
   @override
@@ -20,9 +20,9 @@ class LoginForm extends StatelessWidget {
           DelayedAnimation(
             delay: 500,
             child: TextField(
-              controller: usernameController,
+              controller: emailController,
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
                 labelStyle: TextStyle(
                   color: Colors.grey[400],
                   fontWeight: FontWeight.bold,
