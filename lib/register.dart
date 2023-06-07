@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +6,9 @@ import 'delayed_animation.dart';
 import 'main.dart';
 import 'login_page.dart';
 import 'loginform_register.dart';
+import 'models/user.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
@@ -20,8 +24,8 @@ class RegisterInformation extends StatefulWidget {
 
 class _RegisterInformationState extends State<RegisterInformation> {
 
-  final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -49,7 +53,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+                    'C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/TravelPlanner/images/back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -95,8 +99,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
                 ),
                 SizedBox(height: 35),
                 LoginForm(
-                  usernameController: _usernameController,
-                  firstnameController: _firstnameController,
+                  emailController: _emailController,
                   passwordController: _passwordController,),
                 SizedBox(height: 125),
                 DelayedAnimation(
@@ -119,11 +122,12 @@ class _RegisterInformationState extends State<RegisterInformation> {
                       ),
                     ),
                     onPressed: () {
-                      String firstname = _firstnameController.value.text;
-                      String username = _usernameController.value.text;
+                      String email = _emailController.value.text;
                       String password = _passwordController.value.text;
 
-                      debugPrint("$firstname $username $password");
+                      debugPrint("$email $password");
+                      signUp(email, password);
+                      //User("", firstname, password, username).insertUser();
                       //debugPrint(username);
                       //debugPrint(password);
 
@@ -179,3 +183,26 @@ class _RegisterInformationState extends State<RegisterInformation> {
     );
   }
 }
+
+Future<void> signUp(String email, String password) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    // L'inscription a réussi, vous pouvez ajouter des actions supplémentaires ici
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'weak-password') {
+      print('Le mot de passe est trop faible.');
+    } else if (e.code == 'email-already-in-use') {
+      print('L\'adresse email est déjà utilisée.');
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}
+
+
+
+
+
+
