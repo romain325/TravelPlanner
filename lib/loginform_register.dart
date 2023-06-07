@@ -5,21 +5,20 @@ import 'delayed_animation.dart';
 
 class LoginForm extends StatefulWidget {
 
-  LoginForm({Key? key, required this.usernameController, required this.passwordController, required this.firstnameController}) : super(key: key);
+  LoginForm({Key? key, required this.emailController, required this.passwordController}) : super(key: key);
   @override
   _LoginFormState createState() => _LoginFormState();
 
 
-  TextEditingController firstnameController;
-  TextEditingController usernameController ;
+  TextEditingController emailController ;
   TextEditingController passwordController ;
 }
 
 class _LoginFormState extends State<LoginForm> {
   var _obscureText = true;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _firstanameController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           SizedBox(height: 70),
-          DelayedAnimation(
+          /*DelayedAnimation(
             delay: 0,
             child: TextField(
               controller: _firstanameController,
@@ -42,14 +41,14 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 35),
+          ),*/
+          //SizedBox(height: 35),
           DelayedAnimation(
             delay: 0,
             child: TextField(
-              controller: _usernameController,
+              controller: widget.emailController,
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
                 labelStyle: TextStyle(
                   color: Colors.grey[400],
                   fontWeight: FontWeight.bold,
@@ -57,11 +56,11 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 35),
           DelayedAnimation(
             delay: 0,
             child: TextField(
-              controller: _passwordController,
+              controller: widget.passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 labelStyle: TextStyle(

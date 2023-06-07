@@ -14,7 +14,7 @@ class WelcomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+                image: AssetImage('../assets/back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -31,8 +31,7 @@ class WelcomePage extends StatelessWidget {
                     delay: 0,
                     child: Container(
                       height: 150,
-                      child: Image.asset('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/'
-                          'Travel_Planner/images/travelo.png'),
+                      child: Image.asset('../assets/logoTravelPlanner.png'),
                     ),
                   ),
                   /*DelayedAnimation(
