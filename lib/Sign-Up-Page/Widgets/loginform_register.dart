@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'delayed_animation.dart';
-import 'dart:async';
+import 'Animation/delayed_animation.dart';
 
 
-class LoginForm extends StatelessWidget {
-  var _obscureText = true;
-  LoginForm({Key? key, required this.emailController, required this.passwordController});
+
+class LoginForm extends StatefulWidget {
+
+  LoginForm({Key? key, required this.emailController, required this.passwordController}) : super(key: key);
+  @override
+  _LoginFormState createState() => _LoginFormState();
+
+
   TextEditingController emailController ;
   TextEditingController passwordController ;
+}
+
+class _LoginFormState extends State<LoginForm> {
+  var _obscureText = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +26,25 @@ class LoginForm extends StatelessWidget {
       ),
       child: Column(
         children: [
-          DelayedAnimation(
-            delay: 500,
+          SizedBox(height: 70),
+          /*DelayedAnimation(
+            delay: 0,
             child: TextField(
-              controller: emailController,
+              controller: _firstanameController,
+              decoration: InputDecoration(
+                labelText: 'Firstname',
+                labelStyle: TextStyle(
+                  color: Colors.grey[400],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),*/
+          //SizedBox(height: 35),
+          DelayedAnimation(
+            delay: 0,
+            child: TextField(
+              controller: widget.emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
                 labelStyle: TextStyle(
@@ -30,11 +54,11 @@ class LoginForm extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 35),
           DelayedAnimation(
-            delay: 500,
+            delay: 0,
             child: TextField(
-              controller: passwordController,
+              controller: widget.passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 labelStyle: TextStyle(

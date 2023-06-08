@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'delayed_animation.dart';
+import 'Animation/delayed_animation.dart';
 import 'login_page.dart';
 import 'main.dart';
 import 'register.dart';
@@ -14,7 +14,7 @@ class WelcomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/Travel_Planner/images/back.png'),
+                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/TravelPlanner/images/back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -32,7 +32,7 @@ class WelcomePage extends StatelessWidget {
                     child: Container(
                       height: 150,
                       child: Image.asset('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/'
-                          'Travel_Planner/images/travelo.png'),
+                          'TravelPlanner/images/travelo.png'),
                     ),
                   ),
                   /*DelayedAnimation(

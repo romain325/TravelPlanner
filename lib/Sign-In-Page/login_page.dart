@@ -1,59 +1,57 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'delayed_animation.dart';
+import 'WelcomePage/welcome_page.dart';
+import 'Animation/delayed_animation.dart';
 import 'main.dart';
-import 'login_page.dart';
-import 'loginform_register.dart';
-import 'models/user.dart';
+import 'register.dart';
+import 'loginform_login.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_core/firebase_core.dart';
 
-class RegisterInformation extends StatefulWidget {
-  const RegisterInformation({Key? key}) : super(key: key);
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+class LoginInformation extends StatefulWidget {
+  const LoginInformation({Key? key}) : super(key: key);
 
   @override
-  State<RegisterInformation> createState() => _RegisterInformationState();
+  State<LoginInformation> createState() => _LoginInformationState();
 }
 
 
 
-class _RegisterInformationState extends State<RegisterInformation> {
-
-
+class _LoginInformationState extends State<LoginInformation> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  /*final TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-
-          AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white.withOpacity(0),
-            leading: IconButton(
-              icon: Icon(
-                Icons.close,
-                color: Colors.black,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+          /*AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white.withOpacity(0),
+        leading: IconButton(
+          icon: Icon(
+            Icons.close,
+            color: Colors.black,
+            size: 30,
           ),
-
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),*/
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/TravelPlanner/images/back.png'),
+                image: AssetImage('C:/Users/JUDICAEL-FLORENT/Desktop/COURS 3IL/TravelPlanner/images/back.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -67,16 +65,18 @@ class _RegisterInformationState extends State<RegisterInformation> {
                     horizontal: 30,
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DelayedAnimation(
                         delay: 0,
                         child: Text(
-                          "REGISTER",
+                          "Connect you with your Identifier. "
+                              "if you don't have ther register you",
                           style: GoogleFonts.poppins(
-                            color: d_purpose,
-                            fontSize: 25,
+                            color: Colors.white,
+                            fontSize: 15,
                             fontWeight: FontWeight.w600,
+
                           ),
                         ),
                       ),
@@ -84,12 +84,14 @@ class _RegisterInformationState extends State<RegisterInformation> {
                       DelayedAnimation(
                         delay: 0,
                         child: Text(
-                          "Choose a Username and Password "
-                              "that you want to use for this app ",
+                          "It's recommended to connect your username and your password"
+                              " for us to better protect your information. "
+                              "If you don't have an Account then click on register",
                           style: GoogleFonts.poppins(
-                            color: Colors.grey[600],
+                            color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+
                           ),
                         ),
                       ),
@@ -97,10 +99,8 @@ class _RegisterInformationState extends State<RegisterInformation> {
                     ],
                   ),
                 ),
-                SizedBox(height: 35),
-                LoginForm(
-                  emailController: _emailController,
-                  passwordController: _passwordController,),
+                SizedBox(height: 95),
+                LoginForm(emailController: _emailController, passwordController: _passwordController,),
                 SizedBox(height: 125),
                 DelayedAnimation(
                   delay: 0,
@@ -114,7 +114,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
                       ),
                     ),
                     child: Text(
-                      'REGISTER',
+                      'CONFIRM',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 15,
@@ -124,18 +124,8 @@ class _RegisterInformationState extends State<RegisterInformation> {
                     onPressed: () {
                       String email = _emailController.value.text;
                       String password = _passwordController.value.text;
-
                       debugPrint("$email $password");
-                      signUp(email, password);
-                      //User("", firstname, password, username).insertUser();
-                      //debugPrint(username);
-                      //debugPrint(password);
-
-                      /*FirebaseFirestore.instance.collection('DataTravelPlanner').add({
-                    'FirstName': firstname,
-                    'Username': username,
-                    'password': password,
-                  });*/
+                      signInWithEmailAndPassword(email, password);
 
                       Navigator.push(
                         context,
@@ -147,7 +137,38 @@ class _RegisterInformationState extends State<RegisterInformation> {
                   ),
                 ),
 
-                SizedBox(height: 90),
+                DelayedAnimation(
+                  delay: 500,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      primary: d_purpose,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 125,
+                        vertical: 15,
+
+                      ),
+                    ),
+                    child: Text(
+                      'REGISTER',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        height: 0.75,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterInformation(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 30),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
@@ -157,7 +178,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginInformation(),
+                            builder: (context) => WelcomePage(),
                           ),
                         );
                       },
@@ -180,29 +201,25 @@ class _RegisterInformationState extends State<RegisterInformation> {
           ),
         ],
       ),
+
     );
   }
 }
 
-Future<void> signUp(String email, String password) async {
+Future<void> signInWithEmailAndPassword(String email, String password) async {
+
   try {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
-
-    // L'inscription a réussi, vous pouvez ajouter des actions supplémentaires ici
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    );
   } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      print('Le mot de passe est trop faible.');
-    } else if (e.code == 'email-already-in-use') {
-      print('L\'adresse email est déjà utilisée.');
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
     }
-  } catch (e) {
-    print(e.toString());
   }
+
 }
-
-
-
-
-
 

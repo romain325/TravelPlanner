@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'delayed_animation.dart';
+import 'Animation/delayed_animation.dart';
+import 'dart:async';
 
 
-
-class LoginForm extends StatefulWidget {
-
-  LoginForm({Key? key, required this.emailController, required this.passwordController}) : super(key: key);
-  @override
-  _LoginFormState createState() => _LoginFormState();
-
-
+class LoginForm extends StatelessWidget {
+  var _obscureText = true;
+  LoginForm({Key? key, required this.emailController, required this.passwordController});
   TextEditingController emailController ;
   TextEditingController passwordController ;
-}
-
-class _LoginFormState extends State<LoginForm> {
-  var _obscureText = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +17,10 @@ class _LoginFormState extends State<LoginForm> {
       ),
       child: Column(
         children: [
-          SizedBox(height: 70),
-          /*DelayedAnimation(
-            delay: 0,
-            child: TextField(
-              controller: _firstanameController,
-              decoration: InputDecoration(
-                labelText: 'Firstname',
-                labelStyle: TextStyle(
-                  color: Colors.grey[400],
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),*/
-          //SizedBox(height: 35),
           DelayedAnimation(
-            delay: 0,
+            delay: 500,
             child: TextField(
-              controller: widget.emailController,
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
                 labelStyle: TextStyle(
@@ -54,11 +30,11 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(height: 35),
+          SizedBox(height: 30),
           DelayedAnimation(
-            delay: 0,
+            delay: 500,
             child: TextField(
-              controller: widget.passwordController,
+              controller: passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 labelStyle: TextStyle(
