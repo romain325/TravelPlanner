@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'WelcomePage/welcome_page.dart';
-import 'Animation/delayed_animation.dart';
-import 'main.dart';
-import 'register.dart';
-import 'loginform_login.dart';
+import '../WelcomePage/welcome_page.dart';
+import '../Animation/delayed_animation.dart';
+import '../main.dart';
+import '../Sign-Up-Page/register.dart';
+import 'Widgets/loginform_login.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';

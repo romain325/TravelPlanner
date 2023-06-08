@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Animation/delayed_animation.dart';
+import '../../Animation/delayed_animation.dart';
 import 'dart:async';
 
 
