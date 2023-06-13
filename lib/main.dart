@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:travelplanner/components/navbar.dart';
+import 'package:travelplanner/dayform_page/newdaypage.dart';
+import 'package:travelplanner/temp_page.dart';
 import 'package:travelplanner/views/newtravelstep.dart';
 
 import 'firebase_options.dart';
@@ -46,6 +48,7 @@ class AppState extends State<MyApp> {
         "/roadmap": (context) => const RoadMapPage(),
         "/travel/create": (context) => const NewTravelPage(),
         "/step/create": (context) => const NewTravelStep(),
+        "/temp_page": (context) => TravelListScreen()
       },
       title: 'Travel Planner',
       theme: ThemeData(

@@ -15,6 +15,8 @@ dependencies:
   firebase_auth:
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.1.0
+  flutter_date_picker:
+
 
 dev_dependencies:
   flutter_test:
