@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelplanner/components/commonbutton.dart';
+import 'package:travelplanner/dayform_page/newdaypage.dart';
 import 'package:travelplanner/destination_page/widgets/daycard.dart';
 
 import '../components/backbanner.dart';
@@ -32,7 +33,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
     List<DayCard> dayList = [];
 
     for (Day day in await Day.getDays(widget.destination.id)) {
-      dayList.add(DayCard(day));
+      dayList.add(DayCard(day: day, destination: widget.destination,));
     }
 
     setState(() {
@@ -57,8 +58,16 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
               )
             : Column(children: dayWidgets),
       ),
-
-      CommonButton("Add day", () => log("Add day"))
+      CommonButton(
+          "Add day",
+          () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewDayPage(
+                    destination: widget.destination,
+                  ),
+                ),
+              ))
     ]);
   }
 }

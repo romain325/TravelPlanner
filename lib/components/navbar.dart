@@ -7,7 +7,7 @@ import 'package:travelplanner/views/roadmappage.dart';
 
 class NavBar extends StatelessWidget {
 
-  final List<String> pages = const ["/home","/travel/create", "/roadmap"];
+  final List<String> pages = const ["/home","/travel/create", "/temp_page"];
 
 
   const NavBar({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String currentRoute = ModalRoute.of(context)?.settings.name ?? "/home";
-    int currentIndex = currentRoute == "/home" ? 0 : (currentRoute == "/travel/create" ? 1 : (currentRoute == "/roadmap" ? 2 : 3));
+    int currentIndex = currentRoute == "/home" ? 0 : (currentRoute == "/travel/create" ? 1 : (currentRoute == "/temp_page" ? 2 : 3));
 
     List<Widget> widgets = [
       const NavigationDestination(icon: Icon(Icons.explore), label: "Explore", ),

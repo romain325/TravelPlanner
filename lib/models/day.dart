@@ -15,10 +15,10 @@ class Day {
   final String wake_up;
   int? activity_count = 0;
 
-  Day(this.id, this.comment, this.date, this.destination_id, this.wake_up, [this.activity_count]);
+  Day({required this.comment, required this.date, required this.destination_id, required this.wake_up, this.activity_count = 0, this.id = ""});
 
   // Méthode pour insérer un utilisateur dans la base de données
-  Future<void> insertDay() async {
+  Future<Day> insertDay() async {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Days');
     await reference.push().set({
@@ -27,6 +27,8 @@ class Day {
       'destination_id': destination_id,
       'wake_up': wake_up,
     });
+
+    return this;
   }
 
   // Méthode pour mettre à jour un utilisateur dans la base de données
@@ -57,11 +59,11 @@ class Day {
     if (snapshot.value != null) {
       Map<String, dynamic> userData = snapshot.value as Map<String, dynamic>;
       return Day(
-        dayId,
-        userData['comment'],
-        userData['date'],
-        userData['destination_id'],
-        userData['wake_up'],
+        id: dayId,
+        comment: userData['comment'],
+        date: userData['date'],
+        destination_id: userData['destination_id'],
+        wake_up: userData['wake_up'],
       );
     } else {
       return null; // L'utilisateur n'a pas été trouvé
@@ -89,12 +91,12 @@ class Day {
         String wake_up = ds.child('wake_up').value.toString();
 
         dayList.add(Day(
-          key!,
-          comment,
-          date,
-          destination_id,
-          wake_up,
-          activityCount
+          id: key!,
+          comment: comment,
+          date: date,
+          destination_id: destination_id,
+          wake_up: wake_up,
+          activity_count: activityCount
         ));
       }
 
