@@ -46,9 +46,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
     return Column(children: [
       BackBanner(
           title: widget.destination.city,
-          subtitle: widget.destination.start_date +
-              " - " +
-              widget.destination.end_date,
+          subtitle: "${widget.destination.start_date} - ${widget.destination.end_date}",
           onTap: () {}),
       Expanded(
         flex: 8,

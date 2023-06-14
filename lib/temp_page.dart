@@ -29,10 +29,10 @@ class _TravelListScreenState extends State<TravelListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Liste des travels'),
+        title: const Text('Liste des travels'),
       ),
       body: travelList.isEmpty
-          ? Center(
+          ? const Center(
         child: CircularProgressIndicator(),
       )
           : ListView.builder(
@@ -51,7 +51,7 @@ class _TravelListScreenState extends State<TravelListScreen> {
               );
             },
             trailing: IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: () {
                 deleteTravel(travel);
               },
@@ -77,17 +77,17 @@ class DestinationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Destinations du voyage'),
+        title: const Text('Dest*inations du voyage'),
       ),
       body: FutureBuilder<List<Destination>>(
         future: Destination.getDestinations(travel.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text('Une erreur s\'est produite.'),
             );
           } else if (snapshot.hasData) {
@@ -111,7 +111,7 @@ class DestinationsPage extends StatelessWidget {
               },
             );
           } else {
-            return Center(
+            return const Center(
               child: Text('Aucune destination trouvée.'),
             );
           }
