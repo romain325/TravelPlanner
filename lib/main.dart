@@ -15,7 +15,7 @@ import 'package:travelplanner/components/roadtripcard.dart';
 import 'package:travelplanner/views/homepage.dart';
 import 'package:travelplanner/views/newtravelpage.dart';
 import 'package:travelplanner/views/roadmappage.dart';
-import 'package:travelplanner/welcome_page.dart';
+import 'package:travelplanner/welcome_page/welcome_page.dart';
 
 const d_purpose = Color(0xff800080);
 const d_blue = Color(0xFF0000FF);

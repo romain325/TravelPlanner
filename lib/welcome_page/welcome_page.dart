@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'delayed_animation.dart';
-import 'login_page.dart';
-import 'main.dart';
-import 'register.dart';
+import '../delayed_animation.dart';
+import '../signin_page/login_page.dart';
+import '../main.dart';
+import '../signup_page/register.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
