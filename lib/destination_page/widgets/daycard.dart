@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelplanner/utils.dart';
 
 import '../../day_page/daypage.dart';
 import '../../models/day.dart';
@@ -42,7 +43,7 @@ class DayCardState extends State<DayCard> {
                         flex: 6, // takes 70% of available width
                         child: Column(
                           children: [
-                            Text(widget.day.date,
+                            Text(formatDate(widget.day.date),
                                 style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.purple,

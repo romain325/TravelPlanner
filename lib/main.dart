@@ -32,9 +32,10 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   bool isAuth = false;
-  UserCredential? user;
+  static UserCredential? user;
 
-  MyApp({Key? key, this.user}) : super(key: key) {
+  MyApp({Key? key, UserCredential? user}) : super(key: key) {
+    MyApp.user = user;
     if (user != null) {
       isAuth = true;
     }
@@ -51,9 +52,7 @@ class AppState extends State<MyApp> {
       initialRoute: "/home",
       routes: {
         "/home": (context) => const HomePage(),
-        "/roadmap": (context) => const RoadMapPage(),
         "/travel/create": (context) => const NewTravelPage(),
-        "/step/create": (context) => const NewTravelStep(),
         "/temp_page": (context) => TravelListScreen()
       },
       title: 'Travel Planner',

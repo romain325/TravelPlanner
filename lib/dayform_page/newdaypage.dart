@@ -33,7 +33,9 @@ class _NewDayPageScreenState extends State<NewDayPage> {
       BackBanner(
           title: "New Day",
           subtitle: widget.destination.city,
-          onTap: () {}),
+          onTap: () {
+            Navigator.pop(context);
+          }),
       Expanded(
         flex: 8,
         child: Column(children: [

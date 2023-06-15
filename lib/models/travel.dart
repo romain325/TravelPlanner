@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
 
@@ -58,21 +59,20 @@ class Travel {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Travels').child(travelId);
 
-    DataSnapshot snapshot = (await reference.once()) as DataSnapshot;
-    if (snapshot.value != null) {
-      Map<String, dynamic> userData = snapshot.value as Map<String, dynamic>;
-      return Travel(
-        travelId,
-        userData['arrival'],
-        userData['departure'],
-        userData['end_date'],
-        userData['start_date'],
-        userData['title'],
-        userData['user_id'],
-      );
-    } else {
-      return null; // L'utilisateur n'a pas été trouvé
+    DatabaseEvent event = await reference.once();
+    if(event.type == DatabaseEventType.value) {
+        Map<String, dynamic> userData = event.snapshot.value as Map<String, dynamic>;
+        return Travel(
+          travelId,
+          userData['arrival'],
+          userData['departure'],
+          userData['end_date'],
+          userData['start_date'],
+          userData['title'],
+          userData['user_id'],
+        );
     }
+    return null;
   }
 
   // Méthode pour récupérer la liste des travels d'un utilisateur
@@ -114,4 +114,8 @@ class Travel {
     return travelList;
   }
 
+  @override
+  String toString() {
+    return 'Travel{id: $id, arrival: $arrival, departure: $departure, end_date: $end_date, start_date: $start_date, title: $title, user_id: $user_id}';
+  }
 }

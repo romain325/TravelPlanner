@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelplanner/activityform_page/activityForm_page.dart';
 import 'package:travelplanner/components/commonbutton.dart';
+import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/day_page/widgets/activityCard.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:travelplanner/utils.dart';
 
 import '../activityform_page/widgets/activityForm.dart';
 import '../components/backbanner.dart';
@@ -49,16 +52,20 @@ class _DayPageScreenState extends State<DayPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+        bottomNavigationBar: const NavBar(),
+        body: Column(
       children: [
         BackBanner(
             title: widget.destination.city,
-            subtitle: widget.day.date,
-            onTap: () {}),
+            subtitle: formatDate(widget.day.date),
+            onTap: () {
+              Navigator.pop(context);
+            }),
         Expanded(
             flex: 8,
             child: activityWidgets.isEmpty
-                ? Text("Aucune activité associée")
+                ? const Text("Aucune activité associée")
                 : CarouselSlider(
                     options: CarouselOptions(
                         enableInfiniteScroll: false,
@@ -70,21 +77,13 @@ class _DayPageScreenState extends State<DayPage> {
             () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ActivityForm(
+                    builder: (context) => ActivityFormPage(
                       day: widget.day,
-                      activity: Activity(
-                          address: '',
-                          day_id: '',
-                          duration: '',
-                          hour: '',
-                          price: '',
-                          title: '',
-                          comment: ''),
                       destination: widget.destination,
                     ),
                   ),
                 ))
       ],
-    );
+    ));
   }
 }
