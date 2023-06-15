@@ -7,7 +7,9 @@ import 'package:travelplanner/components/stylizedcard.dart';
 import 'package:travelplanner/view_components/newstepcomp/newstepform.dart';
 
 class NewTravelStep extends StatefulWidget {
-  const NewTravelStep({Key? key}) : super(key: key);
+
+  final String travelId;
+  const NewTravelStep({Key? key, required this.travelId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => NewTravelStepState();
@@ -18,17 +20,17 @@ class NewTravelStepState extends State<NewTravelStep> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: const NavBar(),
       body: Column(
       children: <Widget>[
         BackBanner(
-          title: "New travel",
+          title: "New travel step",
           onTap: () {
-            log("GET BACK");
             Navigator.pop(context);
           },
         ),
-        const StylizedCard(
-          child: NewStepForm(),
+        StylizedCard(
+          child: NewStepForm(travelId: widget.travelId),
         )
       ],
     ));

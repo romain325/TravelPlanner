@@ -37,7 +37,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
             elevation: 0,
             backgroundColor: Colors.white.withOpacity(0),
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.black,
                 size: 30,
@@ -49,7 +49,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
           ),
 
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                     '../assets/back.png'),
@@ -61,7 +61,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 40,
                     horizontal: 30,
                   ),
@@ -79,7 +79,7 @@ class _RegisterInformationState extends State<RegisterInformation> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 22),
+                      const SizedBox(height: 22),
                       DelayedAnimation(
                         delay: 0,
                         child: Text(
@@ -96,18 +96,18 @@ class _RegisterInformationState extends State<RegisterInformation> {
                     ],
                   ),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 LoginForm(
                   emailController: _emailController,
                   passwordController: _passwordController,),
-                SizedBox(height: 125),
+                const SizedBox(height: 125),
                 DelayedAnimation(
                   delay: 0,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                       primary: d_purpose,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 125,
                         vertical: 13,
                       ),
@@ -146,17 +146,17 @@ class _RegisterInformationState extends State<RegisterInformation> {
                   ),
                 ),
 
-                SizedBox(height: 90),
+                const SizedBox(height: 90),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 35),
+                    padding: const EdgeInsets.only(right: 35),
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginInformation(),
+                            builder: (context) => const LoginInformation(),
                           ),
                         );
                       },

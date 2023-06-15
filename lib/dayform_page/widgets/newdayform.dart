@@ -16,7 +16,7 @@ class NewDayForm extends StatefulWidget {
 }
 
 class NewDayFormState extends State<NewDayForm> {
-
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController wakeUpTimeController = TextEditingController();
   final TextEditingController commentController = TextEditingController();
@@ -24,17 +24,19 @@ class NewDayFormState extends State<NewDayForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
+      child: Form(
+        key: _formKey,
+        child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextFormField(
-              controller: dateController,
-              decoration: const InputDecoration(
-                labelText: 'Date',
-                prefixIcon: Icon(Icons.calendar_month)
-              ),
-            ),
+            InputDatePickerFormField(
+                onDateSaved: (value) {
+                  dateController.text = value.millisecondsSinceEpoch.toString();
+                },
+                fieldLabelText: "Date",
+                firstDate: DateTime(0),
+                lastDate: DateTime.now().add(const Duration(days: 365 * 100))),
             const SizedBox(height: 16.0),
             TextFormField(
               controller: wakeUpTimeController,
@@ -55,32 +57,37 @@ class NewDayFormState extends State<NewDayForm> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                String date = dateController.text;
-                String wakeUpTime = wakeUpTimeController.text;
-                String comment = commentController.text;
+                if(_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  String date = dateController.text;
+                  String wakeUpTime = wakeUpTimeController.text;
+                  String comment = commentController.text;
 
-                Day day = Day(
-                  comment: comment,
-                  date: date,
-                  wake_up: wakeUpTime,
-                  destination_id: widget.destination.id,
-                ).insertDay() as Day;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DayPage(
-                      destination: widget.destination,
-                      day: day,
-                    ),
-                  ),
-                );
+                  Day(
+                    comment: comment,
+                    date: date,
+                    wake_up: wakeUpTime,
+                    destination_id: widget.destination.id,
+                  ).insertDay().then((value) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DayPage(
+                          destination: widget.destination,
+                          day: value,
+                        ),
+                      ),
+                    );
+                  });
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Unable to save")));
+                }
               },
-              child: Text('Ajouter'),
+              child: const Text('Ajouter'),
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }

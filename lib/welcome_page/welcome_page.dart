@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travelplanner/components/navbar.dart';
 import '../delayed_animation.dart';
 import '../signin_page/login_page.dart';
 import '../main.dart';
@@ -12,7 +13,7 @@ class WelcomePage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('../assets/back.png'),
                 fit: BoxFit.cover,
@@ -21,7 +22,7 @@ class WelcomePage extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 60,
                 horizontal: 30,
               ),
@@ -54,8 +55,7 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ),
                   ),*/
-                  SizedBox(height: 500),
-
+                  const SizedBox(height: 500),
                   DelayedAnimation(
                     delay: 0,
                     child: Container(
@@ -63,15 +63,15 @@ class WelcomePage extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: d_purpose,
-                          shape: StadiumBorder(),
-                          padding: EdgeInsets.all(13),
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.all(13),
                         ),
-                        child: Text('GET STARTED'),
+                        child: const Text('GET STARTED'),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginInformation(),
+                              builder: (context) => const LoginInformation(),
                             ),
                           );
                         },

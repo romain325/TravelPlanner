@@ -55,9 +55,9 @@ class Destination {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Destinations').child(destinationId);
 
-    DataSnapshot snapshot = (await reference.once()) as DataSnapshot;
-    if (snapshot.value != null) {
-      Map<String, dynamic> userData = snapshot.value as Map<String, dynamic>;
+    DatabaseEvent event = await reference.once();
+    if(event.type == DatabaseEventType.value) {
+      Map<String, dynamic> userData = event.snapshot.value as Map<String, dynamic>;
       return Destination(
         destinationId,
         userData['city'],
@@ -66,9 +66,8 @@ class Destination {
         userData['start_date'],
         userData['travel_id'],
       );
-    } else {
-      return null; // L'utilisateur n'a pas été trouvé
     }
+    return null;
   }
 
   // Méthode pour récupérer la liste des travels d'un utilisateur
@@ -76,7 +75,7 @@ class Destination {
     DatabaseReference reference =
     FirebaseDatabase.instance.ref().child('Destinations');
 
-    Query query = reference.orderByChild('travel_id').equalTo("0");
+    Query query = reference.orderByChild('travel_id').equalTo(travelId);
     DatabaseEvent event = await query.once();
     DataSnapshot snapshot = event.snapshot;
     List<Destination> destinationList = [];

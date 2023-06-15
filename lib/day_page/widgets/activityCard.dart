@@ -63,13 +63,13 @@ class ActivityCardState extends State<ActivityCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Adresse",
+                      const Text("Adresse",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey
                       ),),
                       Text(widget.activity.address,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                         fontWeight: FontWeight.bold
@@ -80,13 +80,13 @@ class ActivityCardState extends State<ActivityCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Heure de début",
+                      const Text("Heure de début",
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey
                         ),),
                       Text(widget.activity.hour,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
                               fontWeight: FontWeight.bold
@@ -97,13 +97,13 @@ class ActivityCardState extends State<ActivityCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Prix",
+                      const Text("Prix",
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey
                         ),),
                       Text(widget.activity.price,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
                               fontWeight: FontWeight.bold
@@ -114,13 +114,30 @@ class ActivityCardState extends State<ActivityCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Durée",
+                      const Text("Durée",
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey
                         ),),
                       Text(widget.activity.duration,
-                          style: TextStyle(
+                          style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text("Commentaire",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey
+                        ),),
+                      Text(widget.activity.comment,
+                          style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
                               fontWeight: FontWeight.bold

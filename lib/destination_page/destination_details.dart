@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelplanner/components/commonbutton.dart';
+import 'package:travelplanner/components/navbar.dart';
 import 'package:travelplanner/dayform_page/newdaypage.dart';
 import 'package:travelplanner/destination_page/widgets/daycard.dart';
+import 'package:travelplanner/utils.dart';
 
 import '../components/backbanner.dart';
 import '../models/day.dart';
@@ -41,14 +42,16 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Scaffold(
+        bottomNavigationBar: const NavBar(),
+        body: Column(children: [
       BackBanner(
           title: widget.destination.city,
-          subtitle: widget.destination.start_date +
-              " - " +
-              widget.destination.end_date,
+          subtitle: "${formatDate(widget.destination.start_date)} - ${formatDate(widget.destination.end_date)}",
           onTap: () {}),
       Expanded(
         flex: 8,
@@ -68,6 +71,6 @@ class _DestinationDetailsScreenState extends State<DestinationDetails> {
                   ),
                 ),
               ))
-    ]);
+    ]));
   }
 }

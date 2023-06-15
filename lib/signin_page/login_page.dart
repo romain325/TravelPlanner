@@ -49,7 +49,7 @@ class _LoginInformationState extends State<LoginInformation> {
         ),
       ),*/
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('../assets/back.png'),
                 fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class _LoginInformationState extends State<LoginInformation> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 40,
                     horizontal: 30,
                   ),
@@ -80,7 +80,7 @@ class _LoginInformationState extends State<LoginInformation> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 22),
+                      const SizedBox(height: 22),
                       DelayedAnimation(
                         delay: 0,
                         child: Text(
@@ -99,16 +99,16 @@ class _LoginInformationState extends State<LoginInformation> {
                     ],
                   ),
                 ),
-                SizedBox(height: 95),
+                const SizedBox(height: 95),
                 LoginForm(emailController: _emailController, passwordController: _passwordController,),
-                SizedBox(height: 125),
+                const SizedBox(height: 125),
                 DelayedAnimation(
                   delay: 0,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                       primary: d_purpose,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 125,
                         vertical: 13,
                       ),
@@ -121,18 +121,18 @@ class _LoginInformationState extends State<LoginInformation> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       String email = _emailController.value.text;
                       String password = _passwordController.value.text;
                       debugPrint("$email $password");
-                      signInWithEmailAndPassword(email, password);
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyApp(),
-                        ),
-                      );
+                      signInWithEmailAndPassword(email, password).then((value) => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyApp(user: value),
+                          ),
+                        )
+                      });
                     },
                   ),
                 ),
@@ -141,9 +141,9 @@ class _LoginInformationState extends State<LoginInformation> {
                   delay: 500,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                       primary: d_purpose,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 125,
                         vertical: 15,
 
@@ -162,17 +162,17 @@ class _LoginInformationState extends State<LoginInformation> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterInformation(),
+                          builder: (context) => const RegisterInformation(),
                         ),
                       );
                     },
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 35),
+                    padding: const EdgeInsets.only(right: 35),
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -206,7 +206,7 @@ class _LoginInformationState extends State<LoginInformation> {
   }
 }
 
-Future<void> signInWithEmailAndPassword(String email, String password) async {
+Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
 
   try {
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -214,12 +214,14 @@ Future<void> signInWithEmailAndPassword(String email, String password) async {
         password: password
     );
     print('user connected');
+    return userCredential;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
       print('No user found for that email.');
     } else if (e.code == 'wrong-password') {
       print('Wrong password provided for that user.');
     }
+    return null;
   }
 
 }
